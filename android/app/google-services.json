@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "401030608943",
+    "project_id": "dungeonsanddragons-4cdfa",
+    "storage_bucket": "dungeonsanddragons-4cdfa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401030608943:android:cc77102b8ccf38e1adaeda",
+        "android_client_info": {
+          "package_name": "com.zui.dungeons_and_dragons"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBU_HDQCjzejoOiFXwgJJsJkuwbzJ1o2Vw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
