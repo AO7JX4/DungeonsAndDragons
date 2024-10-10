@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../custom_widgets/information_collector_button.dart';
 import '../custom_widgets/signing_button.dart';
-import 'character_page.dart';
+import 'choose_character_page.dart';
 
 class RegisterPage extends LoadableWidget {
   const RegisterPage({super.key, required this.showLoginPage});

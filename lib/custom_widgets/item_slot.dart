@@ -20,7 +20,7 @@ class ItemSlot extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
 
-              /// LayoutBuilder hozzáadva
+
               LayoutBuilder(
                 builder: (context, constraints) {
                   return Padding(
@@ -37,7 +37,7 @@ class ItemSlot extends StatelessWidget {
                 },
               ),
 
-              /// LayoutBuilder hozzáadva
+
               LayoutBuilder(
                 builder: (context, constraints) {
                   return Padding(
@@ -57,7 +57,7 @@ class ItemSlot extends StatelessWidget {
                 },
               ),
 
-              /// LayoutBuilder hozzáadva
+
               LayoutBuilder(
                 builder: (context, constraints) {
                   return Padding(
@@ -77,7 +77,7 @@ class ItemSlot extends StatelessWidget {
                 },
               ),
 
-              /// LayoutBuilder hozzáadva
+
               LayoutBuilder(
                 builder: (context, constraints) {
                   return Padding(
@@ -97,7 +97,7 @@ class ItemSlot extends StatelessWidget {
                 },
               ),
 
-              /// LayoutBuilder hozzáadva
+
               LayoutBuilder(
                 builder: (context, constraints) {
                   return Padding(
