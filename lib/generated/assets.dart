@@ -16,11 +16,13 @@ class Assets {
   static const String libFirebaseOptions = 'lib/firebase_options.dart';
   static const String libMain = 'lib/main.dart';
   static const String pagesAuthPage = 'lib/pages/auth_page.dart';
+  static const String pagesCharacterClassSelectionPage = 'lib/pages/character_class_selection_page.dart';
   static const String pagesCharacterCreationPage = 'lib/pages/character_creation_page.dart';
-  static const String pagesCharacterPage = 'lib/pages/character_page.dart';
+  static const String pagesChooseCharacterPage = 'lib/pages/choose_character_page.dart';
   static const String pagesGamePage = 'lib/pages/game_page.dart';
   static const String pagesLoginPage = 'lib/pages/login_page.dart';
   static const String pagesRegisterPage = 'lib/pages/register_page.dart';
   static const String providersCarouselIndexProvider = 'lib/providers/carousel_index_provider.dart';
+
 
 }

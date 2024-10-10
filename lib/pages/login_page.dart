@@ -1,6 +1,6 @@
 import 'package:dungeons_and_dragons/custom_widgets/information_collector_button.dart';
 import 'package:dungeons_and_dragons/custom_widgets/signing_button.dart';
-import 'package:dungeons_and_dragons/pages/character_page.dart';
+import 'package:dungeons_and_dragons/pages/choose_character_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
