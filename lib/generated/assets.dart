@@ -7,6 +7,7 @@ class Assets {
   static const String assetsLoadingPotion = 'lib/assets/loading_potion.gif';
   static const String assetsPlaceholder = 'lib/assets/placeholder.png';
   static const String customWidgetsCharacterCard = 'lib/custom_widgets/character_card.dart';
+  static const String customWidgetsInfiniteCarousel = 'lib/custom_widgets/infinite_carousel.dart';
   static const String customWidgetsInformationCollectorButton = 'lib/custom_widgets/information_collector_button.dart';
   static const String customWidgetsItemSlot = 'lib/custom_widgets/item_slot.dart';
   static const String customWidgetsPotionLoadingIndicator = 'lib/custom_widgets/potion_loading_indicator.dart';
@@ -20,5 +21,6 @@ class Assets {
   static const String pagesGamePage = 'lib/pages/game_page.dart';
   static const String pagesLoginPage = 'lib/pages/login_page.dart';
   static const String pagesRegisterPage = 'lib/pages/register_page.dart';
+  static const String providersCarouselIndexProvider = 'lib/providers/carousel_index_provider.dart';
 
 }
