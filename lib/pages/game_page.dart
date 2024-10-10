@@ -141,7 +141,7 @@ class GamePage extends StatelessWidget {
                           mainAxisSpacing: 5,
                           padding: const EdgeInsets.all(10),
                           children: [
-                            //TODO FIX GRIDSIZE
+                            //TODO FIX GRID SIZE
                             Container(
                               color: Colors.green,
                             ),

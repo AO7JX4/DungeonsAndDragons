@@ -1,13 +1,12 @@
 import 'package:dungeons_and_dragons/abstract/loadable_widget.dart';
 import 'package:dungeons_and_dragons/custom_widgets/character_card.dart';
 import 'package:dungeons_and_dragons/custom_widgets/signing_button.dart';
-import 'package:dungeons_and_dragons/generated/assets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'auth_page.dart';
 import 'character_creation_page.dart';
-import 'game_page.dart'; // Importáld a HomePage-t
+import 'game_page.dart';
 
 class CharacterPage extends LoadableWidget {
   const CharacterPage({super.key});
