@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dungeons_and_dragons/abstract/loadable_widget.dart';
 import 'package:dungeons_and_dragons/custom_widgets/character_card.dart';
 import 'package:dungeons_and_dragons/custom_widgets/signing_button.dart';
@@ -58,14 +59,14 @@ class _CharacterPageState extends State<CharacterPage> {
   }
 
   //Action for navigating to the character creating menu
-  void moveToCharacterCreationPage(){
+  void moveToCharacterCreationPage() {
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
       return const CharacterCreationPage();
     }));
   }
 
   //Action for choosing character and playing the game
-  void chooseCharacter(){
+  void chooseCharacter() {
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
       return const GamePage();
     }));
@@ -73,9 +74,15 @@ class _CharacterPageState extends State<CharacterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final _user = FirebaseAuth.instance.currentUser;
+    final CollectionReference _characters = FirebaseFirestore.instance.collection("Characters");
+    final User? _currentUser = FirebaseAuth.instance.currentUser;
 
-    List<String> items = List<String>.generate(10000, (i) => 'Item $i');
+    Stream<QuerySnapshot> getCharacters() {
+      return _characters
+          .where('userid', isEqualTo: _currentUser?.uid)
+          .snapshots();
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Choose an adventurer"),
@@ -87,14 +94,44 @@ class _CharacterPageState extends State<CharacterPage> {
           )
         ],
       ),
-      body: ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          return CharacterCard(action: chooseCharacter);
+      body: StreamBuilder<QuerySnapshot>(
+        stream: getCharacters(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (snapshot.hasError) {
+            return const Center(child: Text('Error loading characters'));
+          }
+
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            return const Center(child: Text('No characters found'));
+          }
+
+          // Get the list of characters
+          List<DocumentSnapshot> characters = snapshot.data!.docs;
+
+          return ListView.builder(
+            itemCount: characters.length,
+            itemBuilder: (context, index) {
+              DocumentSnapshot document = characters[index];
+              Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+              String characterName = data["name"];
+
+              return CharacterCard(
+                action: chooseCharacter,
+                characterName: characterName,
+              );
+            },
+          );
         },
       ),
       bottomNavigationBar: BottomAppBar(
-        child: SigningButton(action: moveToCharacterCreationPage, buttonText: "Hire new adventurer"),
+        child: SigningButton(
+          action: moveToCharacterCreationPage,
+          buttonText: "Recruit new adventurer",
+        ),
       ),
     );
   }

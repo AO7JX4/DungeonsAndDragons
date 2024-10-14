@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import '../generated/assets.dart';
 
 class CharacterCard extends StatelessWidget {
-  const CharacterCard({super.key, required this.action});
+  const CharacterCard({super.key, required this.action, required this.characterName});
   final VoidCallback action;
+  final String characterName;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { //TODO Relativelayout
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       shape: const RoundedRectangleBorder(),
@@ -30,6 +31,7 @@ class CharacterCard extends StatelessWidget {
                 Assets.assetsPlaceholder,
               ),
             ),
+            Text(characterName),
             Row(
               children: [
                 GestureDetector(

@@ -8,7 +8,7 @@ class PotionLoadingIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-          width: 200.0,
+          width: 200.0,//TODO make adaptive size
           height: 200.0,
           child: Image.asset(Assets.assetsLoadingPotion)),
     );

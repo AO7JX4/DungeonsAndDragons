@@ -7,27 +7,16 @@ class CharacterClassSelectionPage extends StatefulWidget {
   const CharacterClassSelectionPage({super.key});
 
   @override
-  State<CharacterClassSelectionPage> createState() => _CharacterClassSelectionPageState();
+  State<CharacterClassSelectionPage> createState() =>
+      _CharacterClassSelectionPageState();
 }
 
-class _CharacterClassSelectionPageState extends State<CharacterClassSelectionPage> {
+class _CharacterClassSelectionPageState
+    extends State<CharacterClassSelectionPage> {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Expanded(
-            flex: 15,
-            child: Container(
-              color: Colors.green,
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text("Class"),
-                  Text("Appearance"),
-                ],
-              ),
-            )),
         Expanded(
           flex: 85,
           child: Container(
@@ -37,7 +26,6 @@ class _CharacterClassSelectionPageState extends State<CharacterClassSelectionPag
               children: [
                 Image.asset(
                   Assets.assetsItemSlotHero,
-                  fit: BoxFit.fill,
                 ),
                 const Align(
                   alignment: Alignment.topCenter,
@@ -58,30 +46,35 @@ class _CharacterClassSelectionPageState extends State<CharacterClassSelectionPag
                             heightFactor: 0.25,
                             child: Container(
                               color: Colors.blue,
-                              child: Stack(
-                                fit: StackFit.expand,
+                              child: Column(
                                 children: [
-                                  Align(
-                                    alignment: Alignment.topLeft,
-                                    child: FractionallySizedBox(
-                                      widthFactor: 0.2,
-                                      heightFactor: 0.5,
-                                      child: Image.asset(
-                                        Assets.assetsPlaceholder,
-                                        fit: BoxFit.fill,
+                                  Expanded(
+                                    flex: 50,
+                                    child: Container(
+                                      color: Colors.purple,
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                              flex: 15,
+                                              child: Image.asset(
+                                                  Assets.assetsPlaceholder)),
+                                          Expanded(
+                                              flex: 85,
+                                              child: Container(
+                                                  height:
+                                                      MediaQuery.sizeOf(context)
+                                                          .height,
+                                                  color: Colors.green,
+                                                  child: Text("data"))) //Todo layoutbuilder
+                                        ],
                                       ),
                                     ),
                                   ),
-                                  const Align(
-                                    alignment: Alignment.topCenter,
-                                    child: Text(
-                                      "data",
-                                    ),
-                                  ),
-                                  const Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: Text(
-                                      "data",
+                                  const Expanded(
+                                    flex: 50,
+                                    child: Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: Text("data"),
                                     ),
                                   ),
                                 ],
