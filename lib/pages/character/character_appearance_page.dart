@@ -1,3 +1,4 @@
+import 'package:dungeons_and_dragons/custom_widgets/shader_image.dart';
 import 'package:dungeons_and_dragons/generated/assets.dart';
 import 'package:dungeons_and_dragons/providers/appearance_provider.dart'; // Import the appearance provider
 import 'package:flutter/material.dart';
@@ -7,15 +8,22 @@ class CharacterAppearancePage extends ConsumerStatefulWidget {
   const CharacterAppearancePage({super.key});
 
   @override
-  ConsumerState<CharacterAppearancePage> createState() => _CharacterAppearancePageState();
+  ConsumerState<CharacterAppearancePage> createState() =>
+      _CharacterAppearancePageState();
 }
 
-class _CharacterAppearancePageState extends ConsumerState<CharacterAppearancePage> {
+class _CharacterAppearancePageState
+    extends ConsumerState<CharacterAppearancePage> {
   @override
   Widget build(BuildContext context) {
-
     final appearanceState = ref.watch(characterAppearanceStateProvider);
 
+    final hairColor = Color.fromRGBO(
+      appearanceState.hairColorR.toInt(),
+      appearanceState.hairColorG.toInt(),
+      appearanceState.hairColorB.toInt(),
+      1.0,
+    );
     return Column(
       children: [
         Expanded(
@@ -36,7 +44,87 @@ class _CharacterAppearancePageState extends ConsumerState<CharacterAppearancePag
                   flex: 75,
                   child: Container(
                     color: Colors.blue,
-                    child: const Placeholder(),
+                    child: Row(
+                      children: [
+                        const Expanded(
+                          flex: 10,
+                          child: Column(
+                            children: [
+                              Expanded(
+                                flex: 33,
+                                child: Center(
+                                  child: Text("R"),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 33,
+                                child: Center(
+                                  child: Text("G"),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 33,
+                                child: Center(
+                                  child: Text("B"),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          flex: 90,
+                          child: Column(
+                            children: [
+                              Expanded(
+                                flex: 33,
+                                child: Slider(
+                                  value: appearanceState.hairColorR,
+                                  min: 0.0,
+                                  max: 255.0,
+                                  divisions: 255,
+                                  onChanged: (double newValue) {
+                                    ref
+                                        .watch(characterAppearanceStateProvider
+                                            .notifier)
+                                        .updateHairRColor(newValue);
+                                  },
+                                ),
+                              ),
+                              Expanded(
+                                flex: 33,
+                                child: Slider(
+                                  value: appearanceState.hairColorG,
+                                  min: 0.0,
+                                  max: 255.0,
+                                  divisions: 255,
+                                  onChanged: (double newValue) {
+                                    ref
+                                        .watch(characterAppearanceStateProvider
+                                            .notifier)
+                                        .updateHairGColor(newValue);
+                                  },
+                                ),
+                              ),
+                              Expanded(
+                                flex: 33,
+                                child: Slider(
+                                  value: appearanceState.hairColorB,
+                                  min: 0.0,
+                                  max: 255.0,
+                                  divisions: 255,
+                                  onChanged: (double newValue) {
+                                    ref
+                                        .watch(characterAppearanceStateProvider
+                                            .notifier)
+                                        .updateHairBColor(newValue);
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -54,7 +142,9 @@ class _CharacterAppearancePageState extends ConsumerState<CharacterAppearancePag
                   flex: 20,
                   child: GestureDetector(
                     onTap: () {
-                      ref.read(characterAppearanceStateProvider.notifier).changeHeadIndex();
+                      ref
+                          .read(characterAppearanceStateProvider.notifier)
+                          .changeHeadIndex();
                     },
                     child: const Icon(Icons.headset),
                   ),
@@ -63,7 +153,9 @@ class _CharacterAppearancePageState extends ConsumerState<CharacterAppearancePag
                   flex: 20,
                   child: GestureDetector(
                     onTap: () {
-                      ref.read(characterAppearanceStateProvider.notifier).changeHairIndex();
+                      ref
+                          .read(characterAppearanceStateProvider.notifier)
+                          .changeHairIndex();
                     },
                     child: const Icon(Icons.line_axis),
                   ),
@@ -72,7 +164,9 @@ class _CharacterAppearancePageState extends ConsumerState<CharacterAppearancePag
                   flex: 20,
                   child: GestureDetector(
                     onTap: () {
-                      ref.read(characterAppearanceStateProvider.notifier).changeEyeIndex();
+                      ref
+                          .read(characterAppearanceStateProvider.notifier)
+                          .changeEyeIndex();
                     },
                     child: const Icon(Icons.remove_red_eye),
                   ),
@@ -81,7 +175,9 @@ class _CharacterAppearancePageState extends ConsumerState<CharacterAppearancePag
                   flex: 20,
                   child: GestureDetector(
                     onTap: () {
-                      ref.read(characterAppearanceStateProvider.notifier).changeMouthIndex();
+                      ref
+                          .read(characterAppearanceStateProvider.notifier)
+                          .changeMouthIndex();
                     },
                     child: const Icon(Icons.phone_in_talk),
                   ),
@@ -131,13 +227,15 @@ class _CharacterAppearancePageState extends ConsumerState<CharacterAppearancePag
                         ),
                         Align(
                           alignment: Alignment.bottomCenter,
-                          child: Image.asset(appearanceState.headAssets[appearanceState.headIndex]),
+                          child: Image.asset(appearanceState
+                              .headAssets[appearanceState.headIndex]),
                         ),
-                        // Use hairAssets and eyeAssets from appearanceState
                         Align(
                           alignment: Alignment.bottomCenter,
-                          child: Image.asset(
-                            appearanceState.hairAssets[appearanceState.hairIndex],
+                          child: ShaderImage(
+                            imageSrc: appearanceState
+                                .hairAssets[appearanceState.hairIndex],
+                            modColor: hairColor,
                           ),
                         ),
                         Align(
@@ -148,7 +246,8 @@ class _CharacterAppearancePageState extends ConsumerState<CharacterAppearancePag
                         ),
                         Align(
                           alignment: Alignment.bottomCenter,
-                          child: Image.asset(appearanceState.mouthAssets[appearanceState.mouthIndex]),
+                          child: Image.asset(appearanceState
+                              .mouthAssets[appearanceState.mouthIndex]),
                         ),
                       ],
                     ),

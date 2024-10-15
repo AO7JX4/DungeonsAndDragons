@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../custom_widgets/infinite_carousel.dart';
-import '../generated/assets.dart';
-import '../providers/carousel_index_provider.dart';
+import '../../custom_widgets/infinite_carousel.dart';
+import '../../generated/assets.dart';
+import '../../providers/carousel_index_provider.dart';
 
 class CharacterClassSelectionPage extends ConsumerStatefulWidget {
   const CharacterClassSelectionPage({super.key});

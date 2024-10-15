@@ -1,17 +1,29 @@
+import 'package:dungeons_and_dragons/custom_widgets/shader_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../generated/assets.dart';
 import '../providers/appearance_provider.dart';
 
 class CharacterCard extends ConsumerWidget {
-  const CharacterCard(
-      {this.headIndex, this.hairIndex, this.mouthIndex, this.eyeIndex,super.key, required this.action, required this.characterName});
+  const CharacterCard({
+    super.key,
+    required this.headIndex,
+    required this.hairIndex,
+    required this.mouthIndex,
+    required this.eyeIndex,
+    required this.action,
+    required this.deleteAction,
+    required this.characterName,
+    required this.hairColor,
+  });
   final VoidCallback action;
+  final VoidCallback deleteAction;
   final String characterName;
-  final int? headIndex;
-  final int? hairIndex;
-  final int? mouthIndex;
-  final int? eyeIndex;
+  final int headIndex;
+  final int hairIndex;
+  final int mouthIndex;
+  final int eyeIndex;
+  final Color hairColor;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -37,17 +49,18 @@ class CharacterCard extends ConsumerWidget {
               ),
               child: Stack(
                 children: [
+                  ShaderImage(
+                      imageSrc: appearanceState.hairAssets[hairIndex],
+                      modColor: hairColor),
                   Image.asset(
-                    appearanceState.hairAssets[hairIndex!],
+                    appearanceState.headAssets[headIndex],
                   ),
                   Image.asset(
-                    appearanceState.headAssets[headIndex!],
+                    appearanceState.mouthAssets[mouthIndex],
                   ),
-                  Image.asset(
-                    appearanceState.mouthAssets[mouthIndex!],
-                  ),
-                  Image.asset(
-                    appearanceState.eyeAssets[eyeIndex!],
+                  ShaderImage(
+                    imageSrc: appearanceState.eyeAssets[eyeIndex],
+                    modColor: Colors.white,
                   ),
                   Image.asset(
                     Assets.appearanceBody,
@@ -59,7 +72,7 @@ class CharacterCard extends ConsumerWidget {
             Row(
               children: [
                 GestureDetector(
-                    onTap: () {}, //TODO: delete
+                    onTap: deleteAction,
                     child:
                         Icon(Icons.delete, color: Colors.red[700], size: 30)),
                 const SizedBox(width: 10),

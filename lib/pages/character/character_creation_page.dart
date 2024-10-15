@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dungeons_and_dragons/pages/character_class_selection_page.dart';
 import 'package:dungeons_and_dragons/providers/carousel_index_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../custom_widgets/signing_button.dart';
-import '../providers/appearance_provider.dart';
+import '../../custom_widgets/signing_button.dart';
+import '../../providers/appearance_provider.dart';
 import 'character_appearance_page.dart';
+import 'character_class_selection_page.dart';
 import 'character_name_page.dart';
 import 'choose_character_page.dart';
 
@@ -99,7 +99,12 @@ class _CharacterCreationPageState extends ConsumerState<CharacterCreationPage> {
         "hair": appearanceState.hairIndex,
         "eye": appearanceState.eyeIndex,
         "mouth": appearanceState.mouthIndex,
-        "character_id": characterRef.id
+        "character_id": characterRef.id,
+        "hairColor": {
+          "r": appearanceState.hairColorR.toInt(), // Red component
+          "g": appearanceState.hairColorG.toInt(), // Green component
+          "b": appearanceState.hairColorB.toInt(), // Blue component
+        }
       });
 
       await inventoryRef.set({

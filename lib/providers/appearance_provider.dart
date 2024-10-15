@@ -35,6 +35,9 @@ class CharacterAppearanceState extends _$CharacterAppearanceState {
     eyeIndex: 0,
     mouthIndex: 0,
     headIndex: 0,
+    hairColorR: 255.0,
+    hairColorG: 255.0,
+    hairColorB: 255.0,
     hairAssets: hairAssets,
     eyeAssets: eyeAssets,
     mouthAssets: mouthAssets,
@@ -64,14 +67,33 @@ class CharacterAppearanceState extends _$CharacterAppearanceState {
       headIndex: (state.headIndex + 1) % headAssets.length,
     );
   }
-}
 
+  // Update hair color
+  void updateHairRColor(double r) {
+    state = state.copyWith(
+      hairColorR: r,
+    );
+  }
+  void updateHairGColor(double g) {
+    state = state.copyWith(
+      hairColorG: g,
+    );
+  }
+  void updateHairBColor(double b) {
+    state = state.copyWith(
+      hairColorB: b,
+    );
+  }
+}
 
 class CharacterAppearance {
   final int hairIndex;
   final int eyeIndex;
   final int mouthIndex;
   final int headIndex;
+  final double hairColorR;
+  final double hairColorG;
+  final double hairColorB;
   final List<String> hairAssets;
   final List<String> eyeAssets;
   final List<String> mouthAssets;
@@ -82,6 +104,9 @@ class CharacterAppearance {
     required this.eyeIndex,
     required this.mouthIndex,
     required this.headIndex,
+    required this.hairColorR,
+    required this.hairColorG,
+    required this.hairColorB,
     required this.hairAssets,
     required this.eyeAssets,
     required this.mouthAssets,
@@ -93,12 +118,18 @@ class CharacterAppearance {
     int? eyeIndex,
     int? mouthIndex,
     int? headIndex,
+    double? hairColorR,
+    double? hairColorG,
+    double? hairColorB,
   }) {
     return CharacterAppearance(
       hairIndex: hairIndex ?? this.hairIndex,
       eyeIndex: eyeIndex ?? this.eyeIndex,
       mouthIndex: mouthIndex ?? this.mouthIndex,
       headIndex: headIndex ?? this.headIndex,
+      hairColorR: hairColorR ?? this.hairColorR,
+      hairColorG: hairColorG ?? this.hairColorG,
+      hairColorB: hairColorB ?? this.hairColorB,
       hairAssets: hairAssets,
       eyeAssets: eyeAssets,
       mouthAssets: mouthAssets,
@@ -106,4 +137,5 @@ class CharacterAppearance {
     );
   }
 }
+
 

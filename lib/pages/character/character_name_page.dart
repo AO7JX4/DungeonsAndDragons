@@ -1,7 +1,7 @@
 import 'package:dungeons_and_dragons/custom_widgets/signing_button.dart';
 import 'package:flutter/material.dart';
 
-import '../generated/assets.dart';
+import '../../generated/assets.dart';
 
 class CharacterNamePage extends StatefulWidget {
   const CharacterNamePage(
