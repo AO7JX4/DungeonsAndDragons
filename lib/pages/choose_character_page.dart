@@ -19,15 +19,10 @@ class CharacterPage extends LoadableWidget {
 class _CharacterPageState extends State<CharacterPage> {
   //Sign the user out
   void signOut() async {
-    // Show loading circle
     widget.showLoadingPotion(context);
-
     try {
-      //Sign out user
       await FirebaseAuth.instance.signOut();
-
-      // Navigate to auth page
-      widget.hideLoadingPotion(context); // Close loading circle
+      widget.hideLoadingPotion(context);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) {
@@ -35,11 +30,7 @@ class _CharacterPageState extends State<CharacterPage> {
         }),
       );
     } on FirebaseAuthException catch (e) {
-      //When error happens
-      // Close loading circle
       widget.hideLoadingPotion(context);
-
-      // Show error
       showDialog(
         context: context,
         builder: (context) {
@@ -58,14 +49,12 @@ class _CharacterPageState extends State<CharacterPage> {
     }
   }
 
-  //Action for navigating to the character creating menu
   void moveToCharacterCreationPage() {
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
       return const CharacterCreationPage();
     }));
   }
 
-  //Action for choosing character and playing the game
   void chooseCharacter() {
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
       return const GamePage();
@@ -74,13 +63,11 @@ class _CharacterPageState extends State<CharacterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final CollectionReference _characters = FirebaseFirestore.instance.collection("Characters");
-    final User? _currentUser = FirebaseAuth.instance.currentUser;
+    final CollectionReference characters = FirebaseFirestore.instance.collection("Characters");
+    final User? currentUser = FirebaseAuth.instance.currentUser;
 
     Stream<QuerySnapshot> getCharacters() {
-      return _characters
-          .where('userid', isEqualTo: _currentUser?.uid)
-          .snapshots();
+      return characters.where('user_id', isEqualTo: currentUser?.uid).snapshots();
     }
 
     return Scaffold(
@@ -109,19 +96,55 @@ class _CharacterPageState extends State<CharacterPage> {
             return const Center(child: Text('No characters found'));
           }
 
-          // Get the list of characters
           List<DocumentSnapshot> characters = snapshot.data!.docs;
 
           return ListView.builder(
             itemCount: characters.length,
             itemBuilder: (context, index) {
-              DocumentSnapshot document = characters[index];
-              Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-              String characterName = data["name"];
+              DocumentSnapshot characterDocument = characters[index];
+              Map<String, dynamic> characterData = characterDocument.data() as Map<String, dynamic>;
+              String characterName = characterData["name"];
 
-              return CharacterCard(
-                action: chooseCharacter,
-                characterName: characterName,
+              // Fetch the appearances associated with this character
+              String characterId = characterDocument.id; // Assuming document ID is used as character_id
+
+              return StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection('Appearance') // Use your actual collection name
+                    .where('character_id', isEqualTo: characterId)
+                    .snapshots(),
+                builder: (context, appearanceSnapshot) {
+                  if (appearanceSnapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  if (appearanceSnapshot.hasError) {
+                    return const Center(child: Text('Error loading appearances'));
+                  }
+
+                  if (!appearanceSnapshot.hasData || appearanceSnapshot.data!.docs.isEmpty) {
+                    return const Text('No appearances found');
+                  }
+
+                  // Get the list of appearances
+                  List<DocumentSnapshot> appearances = appearanceSnapshot.data!.docs;
+                  // Assuming you want to use only the first appearance for simplicity
+                  Map<String, dynamic> appearanceData = appearances.first.data() as Map<String, dynamic>;
+
+                  int headIndex = appearanceData["head"] ?? 0;
+                  int hairIndex = appearanceData["hair"] ?? 0;
+                  int mouthIndex = appearanceData["mouth"] ?? 0;
+                  int eyeIndex = appearanceData["eye"] ?? 0;
+
+                  return CharacterCard(
+                    hairIndex: hairIndex,
+                    headIndex: headIndex,
+                    mouthIndex: mouthIndex,
+                    eyeIndex: eyeIndex,
+                    action: chooseCharacter,
+                    characterName: characterName,
+                  );
+                },
               );
             },
           );

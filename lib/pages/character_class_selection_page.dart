@@ -1,20 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../custom_widgets/infinite_carousel.dart';
 import '../generated/assets.dart';
+import '../providers/carousel_index_provider.dart';
 
-class CharacterClassSelectionPage extends StatefulWidget {
+class CharacterClassSelectionPage extends ConsumerStatefulWidget {
   const CharacterClassSelectionPage({super.key});
 
   @override
-  State<CharacterClassSelectionPage> createState() =>
+  ConsumerState<CharacterClassSelectionPage> createState() =>
       _CharacterClassSelectionPageState();
 }
 
 class _CharacterClassSelectionPageState
-    extends State<CharacterClassSelectionPage> {
+    extends ConsumerState<CharacterClassSelectionPage> {
   @override
   Widget build(BuildContext context) {
+    int currentIndex = ref.watch(currentCarouselIndexProvider);
+
+    String imageAsset;
+    switch (currentIndex) {
+      case 0:
+        imageAsset = Assets.assetsInfernal;
+        break;
+      case 1:
+        imageAsset = Assets.assetsFallen;
+        break;
+      case 2:
+        imageAsset = Assets.assetsCelestial;
+        break;
+      case 3:
+        imageAsset = Assets.assetsCelestial;
+        break;
+      case 4:
+        imageAsset = Assets.assetsCelestial;
+        break;
+      case 5:
+        imageAsset = Assets.assetsSpectral;
+        break;
+      default:
+        imageAsset = Assets.assetsPlaceholder;
+    }
+
+    String description;
+    switch (currentIndex) {
+      case 0:
+        description = "Infernal description";
+        break;
+      case 1:
+        description = "Fallen description";
+        break;
+      case 2:
+        description = "Celestial description";
+        break;
+      case 3:
+        description = "Lunar description";
+        break;
+      case 4:
+        description = "Umbral description";
+        break;
+      case 5:
+        description = "Spectral description";
+        break;
+      default:
+        description = "Description not found";
+    }
+
     return Column(
       children: [
         Expanded(
@@ -24,8 +76,21 @@ class _CharacterClassSelectionPageState
             child: Stack(
               fit: StackFit.expand,
               children: [
-                Image.asset(
-                  Assets.assetsItemSlotHero,
+                // AnimatedSwitcher added for smooth image transitions
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 500),
+                  transitionBuilder:
+                      (Widget child, Animation<double> animation) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
+                  child: Image.asset(
+                    imageAsset,
+                    key: ValueKey<String>(imageAsset),
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 const Align(
                   alignment: Alignment.topCenter,
@@ -59,22 +124,50 @@ class _CharacterClassSelectionPageState
                                               child: Image.asset(
                                                   Assets.assetsPlaceholder)),
                                           Expanded(
-                                              flex: 85,
-                                              child: Container(
-                                                  height:
-                                                      MediaQuery.sizeOf(context)
-                                                          .height,
-                                                  color: Colors.green,
-                                                  child: Text("data"))) //Todo layoutbuilder
+                                            flex: 85,
+                                            child: Container(
+                                              height: MediaQuery.sizeOf(context)
+                                                  .height,
+                                              color: Colors.green,
+                                              child:  AnimatedSwitcher(
+                                                duration: const Duration(milliseconds: 500),
+                                                transitionBuilder: (Widget child,
+                                                    Animation<double> animation) {
+                                                  return FadeTransition(
+                                                    opacity: animation,
+                                                    child: child,
+                                                  );
+                                                },
+                                                child: Text(
+                                                  description,
+                                                  key: ValueKey<String>(description),
+                                                ),
+                                              ),
+                                            ),
+                                          ), //Todo layoutbuilder
                                         ],
                                       ),
                                     ),
                                   ),
-                                  const Expanded(
+                                  Expanded(
                                     flex: 50,
                                     child: Align(
                                       alignment: Alignment.bottomCenter,
-                                      child: Text("data"),
+                                      child: AnimatedSwitcher(
+                                        duration:
+                                            const Duration(milliseconds: 500),
+                                        transitionBuilder: (Widget child,
+                                            Animation<double> animation) {
+                                          return FadeTransition(
+                                            opacity: animation,
+                                            child: child,
+                                          );
+                                        },
+                                        child: Text(
+                                          description,
+                                          key: ValueKey<String>(description),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ],

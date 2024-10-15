@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import '../generated/assets.dart';
 
 class CharacterNamePage extends StatefulWidget {
-  const CharacterNamePage({super.key, required this.action});
+  const CharacterNamePage(
+      {super.key, required this.action, required this.nameController});
   final VoidCallback action;
+  final TextEditingController nameController;
 
   @override
   State<CharacterNamePage> createState() => _CharacterNamePageState();
@@ -49,17 +51,30 @@ class _CharacterNamePageState extends State<CharacterNamePage> {
                 flex: 50,
                 child: Container(
                   color: Colors.purple,
-                  child: Align(alignment: Alignment.topCenter,
+                  child: Align(
+                    alignment: Alignment.topCenter,
                     child: Container(
                       color: Colors.blue,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            const Expanded(flex: 80,
-                              child: TextField(),
+                        children: [
+                          Expanded(
+                            flex: 80,
+                            child: TextField(
+                              controller: widget.nameController,
+                              decoration: const InputDecoration(
+                                hintText: "Name",
+                              ),
                             ),
-                            Expanded(flex: 20,child: Container(color: Colors.green,child: Image.asset(Assets.assetsPlaceholder))),
-                          ],
+                          ),
+                          Expanded(
+                            flex: 20,
+                            child: Container(
+                              color: Colors.green,
+                              child: Image.asset(Assets.assetsPlaceholder),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -74,11 +89,13 @@ class _CharacterNamePageState extends State<CharacterNamePage> {
             width: MediaQuery.sizeOf(context).width,
             color: Colors.red,
             child: Center(
-                child: FractionallySizedBox(
-                    widthFactor: 0.5,
-                    heightFactor: 0.5,
-                    child: SigningButton(
-                        action: widget.action, buttonText: "buttonText"))),
+              child: FractionallySizedBox(
+                widthFactor: 0.5,
+                heightFactor: 0.5,
+                child: SigningButton(
+                    action: widget.action, buttonText: "buttonText"),
+              ),
+            ),
           ),
         ),
       ],

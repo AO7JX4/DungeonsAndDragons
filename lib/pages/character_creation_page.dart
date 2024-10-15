@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../custom_widgets/signing_button.dart';
+import '../providers/appearance_provider.dart';
 import 'character_appearance_page.dart';
 import 'character_name_page.dart';
-import 'choose_character_page.dart'; // Import the other page
+import 'choose_character_page.dart';
 
 class CharacterCreationPage extends ConsumerStatefulWidget {
   const CharacterCreationPage({super.key});
@@ -19,8 +20,7 @@ class CharacterCreationPage extends ConsumerStatefulWidget {
 }
 
 class _CharacterCreationPageState extends ConsumerState<CharacterCreationPage> {
-  int _selectedPageIndex =
-      0; // Use an integer to keep track of the current page
+  int _selectedPageIndex = 0;
 
   void _showClassPage() {
     setState(() {
@@ -44,26 +44,77 @@ class _CharacterCreationPageState extends ConsumerState<CharacterCreationPage> {
 
   @override
   Widget build(BuildContext context) {
-    int _currentIndex = ref.watch(currentIndexProvider);
-    final CollectionReference _characters = FirebaseFirestore.instance.collection("Characters");
-    final User? _currentUser = FirebaseAuth.instance.currentUser; //TODO riverpod
+    int currentIndex = ref.watch(currentCarouselIndexProvider);
+    final appearanceState = ref.watch(characterAppearanceStateProvider);
+    final TextEditingController nameController = TextEditingController();
 
-    Future<void> _createCharacterForUser() async {
+    final CollectionReference characters = FirebaseFirestore.instance.collection("Characters");
+    final CollectionReference appearance = FirebaseFirestore.instance.collection("Appearance");
+    final CollectionReference inventory = FirebaseFirestore.instance.collection("Inventory");
+    final User? currentUser = FirebaseAuth.instance.currentUser; //TODO riverpod
 
-      DocumentReference docRef = _characters.doc(); // Ez létrehoz egy új dokumentum referenciát
+    String getClass(){ //Todo put this logic in class selection so we dont need currentindex here to rebuild whole tree
+      String characterClass="";
+      switch(currentIndex){
+        case 0:
+          characterClass="Celestial";
+          break;
+        case 1:
+          characterClass="Fallen";
+          break;
+        case 2:
+          characterClass="Infernal";
+          break;
+        case 3:
+          characterClass="Lunar";
+          break;
+        case 4:
+          characterClass="Umbral";
+          break;
+        case 5:
+          characterClass="Spectral";
+          break;
+      }
+      return characterClass;
+    }
 
-      await docRef.set({
-        'id': docRef.id,
-        'name': "test",
-        'stats': "test",
-        "userid": _currentUser!.uid,
-        "class": _currentIndex
+    Future<void> createCharacterForUser() async {
+
+      DocumentReference characterRef = characters.doc();
+      DocumentReference appearanceRef = appearance.doc();
+      DocumentReference inventoryRef = inventory.doc();
+
+
+      await characterRef.set({
+        'id': characterRef.id,
+        'name': nameController.text.trim(),
+        'stats': "test", //Todo
+        "class": getClass(),
+        "user_id": currentUser!.uid,
       });
+
+      await appearanceRef.set({
+        'id': appearanceRef.id,
+        "head": appearanceState.headIndex,
+        "hair": appearanceState.hairIndex,
+        "eye": appearanceState.eyeIndex,
+        "mouth": appearanceState.mouthIndex,
+        "character_id": characterRef.id
+      });
+
+      await inventoryRef.set({
+        'id': inventoryRef.id,
+        "userid": currentUser.uid,
+        "item_id": 1 //Todo
+      });
+
 
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
         return const CharacterPage();
       }));
     }
+
+
 
     return Scaffold(
       appBar: AppBar(
@@ -103,7 +154,7 @@ class _CharacterCreationPageState extends ConsumerState<CharacterCreationPage> {
                 children: [
                   const CharacterClassSelectionPage(),
                   const CharacterAppearancePage(),
-                  CharacterNamePage(action: _createCharacterForUser)
+                  CharacterNamePage(action: createCharacterForUser, nameController: nameController,)
                 ],
               ),
             ),
