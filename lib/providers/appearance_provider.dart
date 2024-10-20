@@ -38,6 +38,9 @@ class CharacterAppearanceState extends _$CharacterAppearanceState {
     hairColorR: 255.0,
     hairColorG: 255.0,
     hairColorB: 255.0,
+    eyeColorR: 255,
+    eyeColorG: 255,
+    eyeColorB: 255,
     hairAssets: hairAssets,
     eyeAssets: eyeAssets,
     mouthAssets: mouthAssets,
@@ -68,7 +71,6 @@ class CharacterAppearanceState extends _$CharacterAppearanceState {
     );
   }
 
-  // Update hair color
   void updateHairRColor(double r) {
     state = state.copyWith(
       hairColorR: r,
@@ -84,6 +86,24 @@ class CharacterAppearanceState extends _$CharacterAppearanceState {
       hairColorB: b,
     );
   }
+
+  void updateEyeRColor(double r) {
+    state = state.copyWith(
+      eyeColorR: r,
+    );
+  }
+
+  void updateEyeGColor(double g) {
+    state = state.copyWith(
+      eyeColorG: g,
+    );
+  }
+
+  void updateEyeBColor(double b) {
+    state = state.copyWith(
+      eyeColorB: b,
+    );
+  }
 }
 
 class CharacterAppearance {
@@ -94,6 +114,9 @@ class CharacterAppearance {
   final double hairColorR;
   final double hairColorG;
   final double hairColorB;
+  final double eyeColorR;
+  final double eyeColorG;
+  final double eyeColorB;
   final List<String> hairAssets;
   final List<String> eyeAssets;
   final List<String> mouthAssets;
@@ -107,6 +130,9 @@ class CharacterAppearance {
     required this.hairColorR,
     required this.hairColorG,
     required this.hairColorB,
+    required this.eyeColorR,
+    required this.eyeColorG,
+    required this.eyeColorB,
     required this.hairAssets,
     required this.eyeAssets,
     required this.mouthAssets,
@@ -121,6 +147,9 @@ class CharacterAppearance {
     double? hairColorR,
     double? hairColorG,
     double? hairColorB,
+    double? eyeColorR,
+    double? eyeColorG,
+    double? eyeColorB,
   }) {
     return CharacterAppearance(
       hairIndex: hairIndex ?? this.hairIndex,
@@ -130,6 +159,9 @@ class CharacterAppearance {
       hairColorR: hairColorR ?? this.hairColorR,
       hairColorG: hairColorG ?? this.hairColorG,
       hairColorB: hairColorB ?? this.hairColorB,
+      eyeColorR: eyeColorR ?? this.eyeColorR,
+      eyeColorG: eyeColorG ?? this.eyeColorG,
+      eyeColorB: eyeColorB ?? this.eyeColorB,
       hairAssets: hairAssets,
       eyeAssets: eyeAssets,
       mouthAssets: mouthAssets,

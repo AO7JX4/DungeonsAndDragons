@@ -5,7 +5,7 @@ import '../generated/assets.dart';
 import '../providers/appearance_provider.dart';
 
 class CharacterCard extends ConsumerWidget {
-  const CharacterCard({
+  const CharacterCard({//Todo use a characterappearence instance instead
     super.key,
     required this.headIndex,
     required this.hairIndex,
@@ -15,6 +15,7 @@ class CharacterCard extends ConsumerWidget {
     required this.deleteAction,
     required this.characterName,
     required this.hairColor,
+    required this.eyeColor,
   });
   final VoidCallback action;
   final VoidCallback deleteAction;
@@ -24,6 +25,7 @@ class CharacterCard extends ConsumerWidget {
   final int mouthIndex;
   final int eyeIndex;
   final Color hairColor;
+  final Color eyeColor;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -60,7 +62,7 @@ class CharacterCard extends ConsumerWidget {
                   ),
                   ShaderImage(
                     imageSrc: appearanceState.eyeAssets[eyeIndex],
-                    modColor: Colors.white,
+                    modColor: eyeColor,
                   ),
                   Image.asset(
                     Assets.appearanceBody,

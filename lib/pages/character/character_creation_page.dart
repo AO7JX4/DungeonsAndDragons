@@ -101,9 +101,14 @@ class _CharacterCreationPageState extends ConsumerState<CharacterCreationPage> {
         "mouth": appearanceState.mouthIndex,
         "character_id": characterRef.id,
         "hairColor": {
-          "r": appearanceState.hairColorR.toInt(), // Red component
-          "g": appearanceState.hairColorG.toInt(), // Green component
-          "b": appearanceState.hairColorB.toInt(), // Blue component
+          "r": appearanceState.hairColorR.toInt(),
+          "g": appearanceState.hairColorG.toInt(),
+          "b": appearanceState.hairColorB.toInt(),
+        },
+        "eyeColor": {
+          "r": appearanceState.eyeColorR.toInt(),
+          "g": appearanceState.eyeColorG.toInt(),
+          "b": appearanceState.eyeColorB.toInt(),
         }
       });
 

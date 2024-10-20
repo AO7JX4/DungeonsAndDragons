@@ -7,7 +7,7 @@ part of 'appearance_provider.dart';
 // **************************************************************************
 
 String _$characterAppearanceStateHash() =>
-    r'30d3d5de38cb251056cfc1a81d8b697ae938025c';
+    r'cca93cfe4950a318bf11c22c38ed41169b35a252';
 
 /// See also [CharacterAppearanceState].
 @ProviderFor(CharacterAppearanceState)

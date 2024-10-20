@@ -24,6 +24,14 @@ class _CharacterAppearancePageState
       appearanceState.hairColorB.toInt(),
       1.0,
     );
+
+    final eyeColor = Color.fromRGBO(
+      appearanceState.eyeColorR.toInt(),
+      appearanceState.eyeColorG.toInt(),
+      appearanceState.eyeColorB.toInt(),
+      1.0,
+    );
+
     return Column(
       children: [
         Expanded(

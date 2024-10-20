@@ -159,6 +159,18 @@ class _CharacterPageState extends State<CharacterPage> {
                     1.0,
                   );
 
+                  Map<String, dynamic>? eyeColorData = appearanceData["eyeColor"];
+                  int eyeColorR = eyeColorData?["r"] ?? 255;
+                  int eyeColorG = eyeColorData?["g"] ?? 255;
+                  int eyeColorB = eyeColorData?["b"] ?? 255;
+
+                  final eyeColor = Color.fromRGBO(
+                    eyeColorR.toInt(),
+                    eyeColorG.toInt(),
+                    eyeColorB.toInt(),
+                    1.0,
+                  );
+
                   return CharacterCard(
                     deleteAction: () {
                       deleteCharacter(characterId, appearanceDocument.id);
@@ -170,6 +182,7 @@ class _CharacterPageState extends State<CharacterPage> {
                     action: chooseCharacter,
                     characterName: characterName,
                     hairColor: hairColor,
+                    eyeColor: eyeColor,
                   );
                 },
               );
