@@ -3,28 +3,45 @@ class Assets {
   Assets._();
 
   static const String abstractLoadableWidget = 'lib/abstract/loadable_widget.dart';
+  static const String appearanceBody = 'lib/assets/appearance/body.png';
+  static const String appearanceEye1 = 'lib/assets/appearance/eye1.png';
+  static const String appearanceEye2 = 'lib/assets/appearance/eye2.png';
+  static const String appearanceEye3 = 'lib/assets/appearance/eye3.png';
+  static const String appearanceHair1 = 'lib/assets/appearance/hair1.png';
+  static const String appearanceHair2 = 'lib/assets/appearance/hair2.png';
+  static const String appearanceHair3 = 'lib/assets/appearance/hair3.png';
+  static const String appearanceHead1 = 'lib/assets/appearance/head1.png';
+  static const String appearanceHead2 = 'lib/assets/appearance/head2.png';
+  static const String appearanceHead3 = 'lib/assets/appearance/head3.png';
+  static const String appearanceMouth1 = 'lib/assets/appearance/mouth1.png';
+  static const String appearanceMouth2 = 'lib/assets/appearance/mouth2.png';
+  static const String appearanceMouth3 = 'lib/assets/appearance/mouth3.png';
+  static const String assetsCelestial = 'lib/assets/celestial.png';
+  static const String assetsFallen = 'lib/assets/fallen.png';
+  static const String assetsInfernal = 'lib/assets/infernal.png';
   static const String assetsItemSlotHero = 'lib/assets/item_slot_hero.png';
   static const String assetsLoadingPotion = 'lib/assets/loading_potion.gif';
   static const String assetsPlaceholder = 'lib/assets/placeholder.png';
+  static const String assetsSpectral = 'lib/assets/spectral.png';
+  static const String characterCharacterAppearancePage = 'lib/pages/character/character_appearance_page.dart';
+  static const String characterCharacterClassSelectionPage = 'lib/pages/character/character_class_selection_page.dart';
+  static const String characterCharacterCreationPage = 'lib/pages/character/character_creation_page.dart';
+  static const String characterCharacterNamePage = 'lib/pages/character/character_name_page.dart';
+  static const String characterChooseCharacterPage = 'lib/pages/character/choose_character_page.dart';
   static const String customWidgetsCharacterCard = 'lib/custom_widgets/character_card.dart';
   static const String customWidgetsInfiniteCarousel = 'lib/custom_widgets/infinite_carousel.dart';
   static const String customWidgetsInformationCollectorButton = 'lib/custom_widgets/information_collector_button.dart';
   static const String customWidgetsItemSlot = 'lib/custom_widgets/item_slot.dart';
   static const String customWidgetsPotionLoadingIndicator = 'lib/custom_widgets/potion_loading_indicator.dart';
+  static const String customWidgetsShaderImage = 'lib/custom_widgets/shader_image.dart';
   static const String customWidgetsSigningButton = 'lib/custom_widgets/signing_button.dart';
   static const String generatedAssets = 'lib/generated/assets.dart';
   static const String libFirebaseOptions = 'lib/firebase_options.dart';
   static const String libMain = 'lib/main.dart';
   static const String pagesAuthPage = 'lib/pages/auth_page.dart';
-  static const String pagesCharacterAppearancePage = 'lib/pages/character_appearance_page.dart';
-  static const String pagesCharacterClassSelectionPage = 'lib/pages/character_class_selection_page.dart';
-  static const String pagesCharacterCreationPage = 'lib/pages/character_creation_page.dart';
-  static const String pagesCharacterNamePage = 'lib/pages/character_name_page.dart';
-  static const String pagesChooseCharacterPage = 'lib/pages/choose_character_page.dart';
   static const String pagesGamePage = 'lib/pages/game_page.dart';
   static const String pagesLoginPage = 'lib/pages/login_page.dart';
   static const String pagesRegisterPage = 'lib/pages/register_page.dart';
-  static const String providersCarouselIndexProvider = 'lib/providers/carousel_index_provider.dart';
-
+  static const String shadersChangeImageColorShader = 'lib/assets/shaders/change_image_color_shader.frag';
 
 }

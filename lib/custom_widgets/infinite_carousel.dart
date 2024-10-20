@@ -12,17 +12,17 @@ class InfiniteCarousel extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final currentIndex = ref.watch(currentIndexProvider);
+    final currentIndex = ref.watch(currentCarouselIndexProvider);
 
     return CarouselSlider.builder(
-      itemCount: 10,
+      itemCount: 6,
       options: CarouselOptions(
         height: MediaQuery.of(context).size.height * 0.2,
         enlargeCenterPage: true,
         viewportFraction: 0.3,
         enableInfiniteScroll: true,
         onPageChanged: (index, reason) {
-          ref.read(currentIndexProvider.notifier).setIndex(index);
+          ref.read(currentCarouselIndexProvider.notifier).setIndex(index);
         },
       ),
       itemBuilder: (context, index, realIdx) {
