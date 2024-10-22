@@ -1,6 +1,7 @@
+import 'package:dungeons_and_dragons/custom_widgets/color_slider.dart';
 import 'package:dungeons_and_dragons/custom_widgets/shader_image.dart';
 import 'package:dungeons_and_dragons/generated/assets.dart';
-import 'package:dungeons_and_dragons/providers/appearance_provider.dart'; // Import the appearance provider
+import 'package:dungeons_and_dragons/providers/appearance_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,6 +15,28 @@ class CharacterAppearancePage extends ConsumerStatefulWidget {
 
 class _CharacterAppearancePageState
     extends ConsumerState<CharacterAppearancePage> {
+
+  int _selectedPageIndex = 0;
+
+  void _showHairColorSlider() {
+    setState(() {
+      _selectedPageIndex = 0;
+    });
+  }
+
+  void _showEyeColorSlider() {
+    setState(() {
+      _selectedPageIndex = 1;
+    });
+  }
+
+  void _showSmth() { //TODO put smth here
+    setState(() {
+      _selectedPageIndex = 2;
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final appearanceState = ref.watch(characterAppearanceStateProvider);
@@ -52,87 +75,55 @@ class _CharacterAppearancePageState
                   flex: 75,
                   child: Container(
                     color: Colors.blue,
-                    child: Row(
-                      children: [
-                        const Expanded(
-                          flex: 10,
-                          child: Column(
-                            children: [
-                              Expanded(
-                                flex: 33,
-                                child: Center(
-                                  child: Text("R"),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 33,
-                                child: Center(
-                                  child: Text("G"),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 33,
-                                child: Center(
-                                  child: Text("B"),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          flex: 90,
-                          child: Column(
-                            children: [
-                              Expanded(
-                                flex: 33,
-                                child: Slider(
-                                  value: appearanceState.hairColorR,
-                                  min: 0.0,
-                                  max: 255.0,
-                                  divisions: 255,
-                                  onChanged: (double newValue) {
-                                    ref
-                                        .watch(characterAppearanceStateProvider
-                                            .notifier)
-                                        .updateHairRColor(newValue);
-                                  },
-                                ),
-                              ),
-                              Expanded(
-                                flex: 33,
-                                child: Slider(
-                                  value: appearanceState.hairColorG,
-                                  min: 0.0,
-                                  max: 255.0,
-                                  divisions: 255,
-                                  onChanged: (double newValue) {
-                                    ref
-                                        .watch(characterAppearanceStateProvider
-                                            .notifier)
-                                        .updateHairGColor(newValue);
-                                  },
-                                ),
-                              ),
-                              Expanded(
-                                flex: 33,
-                                child: Slider(
-                                  value: appearanceState.hairColorB,
-                                  min: 0.0,
-                                  max: 255.0,
-                                  divisions: 255,
-                                  onChanged: (double newValue) {
-                                    ref
-                                        .watch(characterAppearanceStateProvider
-                                            .notifier)
-                                        .updateHairBColor(newValue);
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                    child: IndexedStack(index: _selectedPageIndex,children: [
+                      ColorSlider(
+                        colorValueR: appearanceState.hairColorR,
+                        colorValueG: appearanceState.hairColorG,
+                        colorValueB: appearanceState.hairColorB,
+                        onRChanged: (newValue) {
+                          ref
+                              .read(characterAppearanceStateProvider
+                                  .notifier)
+                              .updateHairRColor(newValue);
+                        },
+                        onGChanged: (newValue) {
+                          ref
+                              .read(characterAppearanceStateProvider
+                                  .notifier)
+                              .updateHairGColor(newValue);
+                        },
+                        onBChanged: (newValue) {
+                          ref
+                              .read(characterAppearanceStateProvider
+                                  .notifier)
+                              .updateHairBColor(newValue);
+                        },
+                      ),
+                      ColorSlider(
+                        colorValueR: appearanceState.eyeColorR,
+                        colorValueG: appearanceState.eyeColorG,
+                        colorValueB: appearanceState.eyeColorB,
+                        onRChanged: (newValue) {
+                          ref
+                              .read(characterAppearanceStateProvider
+                                  .notifier)
+                              .updateEyeRColor(newValue);
+                        },
+                        onGChanged: (newValue) {
+                          ref
+                              .read(characterAppearanceStateProvider
+                                  .notifier)
+                              .updateEyeGColor(newValue);
+                        },
+                        onBChanged: (newValue) {
+                          ref
+                              .read(characterAppearanceStateProvider
+                                  .notifier)
+                              .updateEyeBColor(newValue);
+                        },
+                      ),
+                      const Placeholder() //TODO smth here
+                    ]),
                   ),
                 ),
               ],
@@ -204,19 +195,25 @@ class _CharacterAppearancePageState
                   flex: 15,
                   child: Container(
                     color: Colors.blue,
-                    child: const Column(
+                    child: Column(
                       children: [
                         Expanded(
                           flex: 33,
-                          child: Icon(Icons.icecream),
+                          child: GestureDetector(
+                            onTap: _showHairColorSlider,
+                              child: const Icon(Icons.color_lens)),
                         ),
                         Expanded(
                           flex: 33,
-                          child: Icon(Icons.icecream),
+                          child: GestureDetector(
+                            onTap: _showEyeColorSlider,
+                              child: const Icon(Icons.colorize)),
                         ),
                         Expanded(
                           flex: 33,
-                          child: Icon(Icons.icecream),
+                          child: GestureDetector(
+                            onTap: _showSmth,
+                              child: const Icon(Icons.icecream)),
                         ),
                       ],
                     ),
@@ -248,8 +245,10 @@ class _CharacterAppearancePageState
                         ),
                         Align(
                           alignment: Alignment.bottomCenter,
-                          child: Image.asset(
-                            appearanceState.eyeAssets[appearanceState.eyeIndex],
+                          child: ShaderImage(
+                            imageSrc: appearanceState
+                                .eyeAssets[appearanceState.eyeIndex],
+                            modColor: eyeColor,
                           ),
                         ),
                         Align(

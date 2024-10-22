@@ -1,53 +1,52 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dungeons_and_dragons/abstract/loadable_widget.dart';
+import 'package:dungeons_and_dragons/mixins/m_loadable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../custom_widgets/information_collector_button.dart';
 import '../custom_widgets/signing_button.dart';
 import 'character/choose_character_page.dart';
 
-class RegisterPage extends LoadableWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key, required this.showLoginPage});
   final VoidCallback showLoginPage;
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
-
 }
 
-
-
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterPageState extends State<RegisterPage> with MLoadable {
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
-  final CollectionReference users = FirebaseFirestore.instance.collection("Users"); //Todo riverpodba berakni + leképzés osztályra
+  final CollectionReference users = FirebaseFirestore.instance
+      .collection("Users"); //Todo riverpodba berakni + leképzés osztályra
 
   //Register user
   Future signUp() async {
     if (isPasswordConfirmed()) {
-      widget.showLoadingPotion(context); // Show loading
+      showLoadingPotion(context); // Show loading
 
       try {
-        // Firebase Authentication segítségével regisztráció
-        UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+
+        UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
-
 
         String uid = userCredential.user!.uid;
 
         await addUserToFirestore(uid);
 
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) {
           return const CharacterPage();
         }));
       } on FirebaseAuthException catch (e) {
-        widget.hideLoadingPotion(context); // Hide loading
+        hideLoadingPotion(context); // Hide loading
         showDialog(
           context: context,
           builder: (context) {
@@ -91,7 +90,8 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   bool isPasswordConfirmed() {
-    return _passwordController.text.trim() == _confirmPasswordController.text.trim();
+    return _passwordController.text.trim() ==
+        _confirmPasswordController.text.trim();
   }
 
   @override
