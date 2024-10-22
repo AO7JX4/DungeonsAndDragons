@@ -1,5 +1,4 @@
 import 'package:dungeons_and_dragons/pages/auth_page.dart';
-import 'package:dungeons_and_dragons/pages/character/character_creation_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

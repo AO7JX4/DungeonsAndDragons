@@ -1,36 +1,38 @@
 import 'package:dungeons_and_dragons/custom_widgets/shader_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../generated/assets.dart';
 import '../providers/appearance_provider.dart';
 
-class CharacterCard extends ConsumerWidget {
-  const CharacterCard({//Todo use a characterappearence instance instead
+class CharacterCard extends StatelessWidget {
+  const CharacterCard({
     super.key,
-    required this.headIndex,
-    required this.hairIndex,
-    required this.mouthIndex,
-    required this.eyeIndex,
     required this.action,
     required this.deleteAction,
     required this.characterName,
-    required this.hairColor,
-    required this.eyeColor,
+    required this.appearance,
   });
   final VoidCallback action;
   final VoidCallback deleteAction;
   final String characterName;
-  final int headIndex;
-  final int hairIndex;
-  final int mouthIndex;
-  final int eyeIndex;
-  final Color hairColor;
-  final Color eyeColor;
+  final CharacterAppearance appearance;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    //TODO Relativelayout
-    final appearanceState = ref.watch(characterAppearanceStateProvider);
+  Widget build(BuildContext context) {
+
+    final eyeColor = Color.fromRGBO(
+      appearance.eyeColorR.toInt(),
+      appearance.eyeColorG.toInt(),
+      appearance.eyeColorB.toInt(),
+      1.0,
+    );
+
+    final hairColor = Color.fromRGBO(
+      appearance.hairColorR.toInt(),
+      appearance.hairColorG.toInt(),
+      appearance.hairColorB.toInt(),
+      1.0,
+    );
+
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       shape: const RoundedRectangleBorder(),
@@ -41,7 +43,7 @@ class CharacterCard extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              width: 100,
+              width: 100, //Todo relative layout
               height: 100,
               decoration: BoxDecoration(
                 border: Border.all(
@@ -52,16 +54,16 @@ class CharacterCard extends ConsumerWidget {
               child: Stack(
                 children: [
                   ShaderImage(
-                      imageSrc: appearanceState.hairAssets[hairIndex],
+                      imageSrc: appearance.hairAssets[appearance.hairIndex],
                       modColor: hairColor),
                   Image.asset(
-                    appearanceState.headAssets[headIndex],
+                    appearance.headAssets[appearance.headIndex],
                   ),
                   Image.asset(
-                    appearanceState.mouthAssets[mouthIndex],
+                    appearance.mouthAssets[appearance.mouthIndex],
                   ),
                   ShaderImage(
-                    imageSrc: appearanceState.eyeAssets[eyeIndex],
+                    imageSrc: appearance.eyeAssets[appearance.eyeIndex],
                     modColor: eyeColor,
                   ),
                   Image.asset(

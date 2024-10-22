@@ -2,7 +2,7 @@
 class Assets {
   Assets._();
 
-  static const String abstractLoadableWidget = 'lib/abstract/loadable_widget.dart';
+  static const String abstractLoadableWidget = 'lib/abstract/m_loadable.dart';
   static const String appearanceBody = 'lib/assets/appearance/body.png';
   static const String appearanceEye1 = 'lib/assets/appearance/eye1.png';
   static const String appearanceEye2 = 'lib/assets/appearance/eye2.png';
@@ -29,6 +29,7 @@ class Assets {
   static const String characterCharacterNamePage = 'lib/pages/character/character_name_page.dart';
   static const String characterChooseCharacterPage = 'lib/pages/character/choose_character_page.dart';
   static const String customWidgetsCharacterCard = 'lib/custom_widgets/character_card.dart';
+  static const String customWidgetsColorSlider = 'lib/custom_widgets/color_slider.dart';
   static const String customWidgetsInfiniteCarousel = 'lib/custom_widgets/infinite_carousel.dart';
   static const String customWidgetsInformationCollectorButton = 'lib/custom_widgets/information_collector_button.dart';
   static const String customWidgetsItemSlot = 'lib/custom_widgets/item_slot.dart';
@@ -42,6 +43,7 @@ class Assets {
   static const String pagesGamePage = 'lib/pages/game_page.dart';
   static const String pagesLoginPage = 'lib/pages/login_page.dart';
   static const String pagesRegisterPage = 'lib/pages/register_page.dart';
+  static const String providersAppearanceProvider = 'lib/providers/appearance_provider.dart';
   static const String shadersChangeImageColorShader = 'lib/assets/shaders/change_image_color_shader.frag';
 
 }

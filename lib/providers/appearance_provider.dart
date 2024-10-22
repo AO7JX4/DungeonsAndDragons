@@ -5,7 +5,7 @@ part 'appearance_provider.g.dart';
 
 @riverpod
 class CharacterAppearanceState extends _$CharacterAppearanceState {
-  final List<String> hairAssets = [
+  final List<String> hairAssets = [ //Todo assetprovider
     Assets.appearanceHair1,
     Assets.appearanceHair2,
     Assets.appearanceHair3,

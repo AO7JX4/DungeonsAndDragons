@@ -1,20 +1,21 @@
 import 'package:dungeons_and_dragons/custom_widgets/information_collector_button.dart';
 import 'package:dungeons_and_dragons/custom_widgets/signing_button.dart';
+import 'package:dungeons_and_dragons/mixins/m_loadable.dart';
 import 'package:dungeons_and_dragons/pages/character/choose_character_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../abstract/loadable_widget.dart';
 
-class LoginPage extends LoadableWidget {
+class LoginPage extends StatefulWidget  {
   const LoginPage({super.key, required this.showRegisterPage});
   final VoidCallback showRegisterPage;
 
   @override
   State<LoginPage> createState() => _LoginPageState();
+
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> with MLoadable {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -22,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   //Sign in the user to firebase
   Future signIn() async {
     // Show loading indicator
-    widget.showLoadingPotion(context);
+    showLoadingPotion(context);
 
     try {
       // Sign in with Firebase
@@ -36,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
         return const CharacterPage();
       }));
     } on FirebaseAuthException catch (e) {
-      widget.hideLoadingPotion(context);// Remove loading indicator
+      hideLoadingPotion(context);// Remove loading indicator
 
       // Show error message if sign-in fails
       showDialog(
