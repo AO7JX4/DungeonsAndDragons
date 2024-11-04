@@ -1,17 +1,16 @@
 import 'package:dungeons_and_dragons/custom_widgets/shader_image.dart';
 import 'package:flutter/material.dart';
 import '../generated/assets.dart';
+import '../pages/game_page.dart';
 import '../providers/appearance_provider.dart';
 
 class CharacterCard extends StatelessWidget {
   const CharacterCard({
     super.key,
-    required this.action,
     required this.deleteAction,
     required this.characterName,
     required this.appearance,
   });
-  final VoidCallback action;
   final VoidCallback deleteAction;
   final String characterName;
   final CharacterAppearance appearance;
@@ -33,6 +32,11 @@ class CharacterCard extends StatelessWidget {
       1.0,
     );
 
+    void chooseCharacter() {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return GamePage(appearance: appearance);
+      }));
+    }
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       shape: const RoundedRectangleBorder(),
@@ -81,7 +85,7 @@ class CharacterCard extends StatelessWidget {
                         Icon(Icons.delete, color: Colors.red[700], size: 30)),
                 const SizedBox(width: 10),
                 GestureDetector(
-                  onTap: action,
+                  onTap: chooseCharacter,
                   child: Icon(Icons.play_arrow,
                       color: Colors.greenAccent[400], size: 30),
                 ),

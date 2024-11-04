@@ -1,73 +1,58 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../generated/assets.dart';
+import 'asset_provider.dart';
 
 part 'appearance_provider.g.dart';
 
 @riverpod
 class CharacterAppearanceState extends _$CharacterAppearanceState {
-  final List<String> hairAssets = [ //Todo assetprovider
-    Assets.appearanceHair1,
-    Assets.appearanceHair2,
-    Assets.appearanceHair3,
-  ];
-
-  final List<String> eyeAssets = [
-    Assets.appearanceEye1,
-    Assets.appearanceEye2,
-    Assets.appearanceEye3,
-  ];
-
-  final List<String> mouthAssets = [
-    Assets.appearanceMouth1,
-    Assets.appearanceMouth2,
-    Assets.appearanceMouth3,
-  ];
-
-  final List<String> headAssets = [
-    Assets.appearanceHead1,
-    Assets.appearanceHead2,
-    Assets.appearanceHead3,
-  ];
-
   @override
-  CharacterAppearance build() => CharacterAppearance(
-    hairIndex: 0,
-    eyeIndex: 0,
-    mouthIndex: 0,
-    headIndex: 0,
-    hairColorR: 255.0,
-    hairColorG: 255.0,
-    hairColorB: 255.0,
-    eyeColorR: 255,
-    eyeColorG: 255,
-    eyeColorB: 255,
-    hairAssets: hairAssets,
-    eyeAssets: eyeAssets,
-    mouthAssets: mouthAssets,
-    headAssets: headAssets,
-  );
+  CharacterAppearance build() {
+    final hairAssets = ref.watch(hairAssetsProvider);
+    final eyeAssets = ref.watch(eyeAssetsProvider);
+    final mouthAssets = ref.watch(mouthAssetsProvider);
+    final headAssets = ref.watch(headAssetsProvider);
+
+    return CharacterAppearance(
+      hairIndex: 0,
+      eyeIndex: 0,
+      mouthIndex: 0,
+      headIndex: 0,
+      hairColorR: 255.0,
+      hairColorG: 255.0,
+      hairColorB: 255.0,
+      eyeColorR: 255,
+      eyeColorG: 255,
+      eyeColorB: 255,
+      hairAssets: hairAssets,
+      eyeAssets: eyeAssets,
+      mouthAssets: mouthAssets,
+      headAssets: headAssets,
+    );
+  }
+
+
 
   void changeHairIndex() {
     state = state.copyWith(
-      hairIndex: (state.hairIndex + 1) % hairAssets.length,
+      hairIndex: (state.hairIndex + 1) % state.hairAssets.length,
     );
   }
 
   void changeEyeIndex() {
     state = state.copyWith(
-      eyeIndex: (state.eyeIndex + 1) % eyeAssets.length,
+      eyeIndex: (state.eyeIndex + 1) % state.eyeAssets.length,
     );
   }
 
   void changeMouthIndex() {
     state = state.copyWith(
-      mouthIndex: (state.mouthIndex + 1) % mouthAssets.length,
+      mouthIndex: (state.mouthIndex + 1) % state.mouthAssets.length,
     );
   }
 
   void changeHeadIndex() {
     state = state.copyWith(
-      headIndex: (state.headIndex + 1) % headAssets.length,
+      headIndex: (state.headIndex + 1) % state.headAssets.length,
     );
   }
 
@@ -76,11 +61,13 @@ class CharacterAppearanceState extends _$CharacterAppearanceState {
       hairColorR: r,
     );
   }
+
   void updateHairGColor(double g) {
     state = state.copyWith(
       hairColorG: g,
     );
   }
+
   void updateHairBColor(double b) {
     state = state.copyWith(
       hairColorB: b,
@@ -169,5 +156,3 @@ class CharacterAppearance {
     );
   }
 }
-
-
