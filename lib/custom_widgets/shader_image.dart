@@ -26,7 +26,6 @@ class _ShaderImageState extends State<ShaderImage> {
     final program = await FragmentProgram.fromAsset(Assets.shadersChangeImageColorShader);
     final loadedShader = program.fragmentShader();
 
-
     image = loadedImage;
     shader = loadedShader;
 
@@ -36,8 +35,6 @@ class _ShaderImageState extends State<ShaderImage> {
   }
 
   Future<void> _createImageWithShader(ui.Image sourceImage) async {
-    /* We need a recorder to create a raw image instead of CustomPaint,
-    because CustomPaint fills parent container in whole */
     final recorder = ui.PictureRecorder();
     final canvas = Canvas(recorder);
 
@@ -55,9 +52,13 @@ class _ShaderImageState extends State<ShaderImage> {
 
       final picture = recorder.endRecording();
       final ui.Image generatedImage = await picture.toImage(sourceImage.width, sourceImage.height);
-      setState(() {
-        finalImage = generatedImage;
-      });
+
+
+      if (mounted) {
+        setState(() {
+          finalImage = generatedImage;
+        });
+      }
     }
   }
 
@@ -76,6 +77,12 @@ class _ShaderImageState extends State<ShaderImage> {
     if (oldWidget.modColor != widget.modColor && image != null) { //If image color changed
       _createImageWithShader(image!);
     }
+  }
+
+  @override
+  void dispose() {
+    // Optional: Perform cleanup here if needed
+    super.dispose();
   }
 
   @override

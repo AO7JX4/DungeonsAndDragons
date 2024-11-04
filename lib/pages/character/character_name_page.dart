@@ -93,7 +93,7 @@ class _CharacterNamePageState extends State<CharacterNamePage> {
                 widthFactor: 0.5,
                 heightFactor: 0.5,
                 child: SigningButton(
-                    action: widget.action, buttonText: "buttonText"),
+                    action: widget.action, buttonText: "Hire"),
               ),
             ),
           ),

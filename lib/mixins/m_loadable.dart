@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../custom_widgets/potion_loading_indicator.dart';
 
- mixin MLoadable  {
+ mixin class MLoadable  {
 
   void showLoadingPotion(BuildContext context) {
     showGeneralDialog(
@@ -10,7 +10,7 @@ import '../custom_widgets/potion_loading_indicator.dart';
       barrierLabel: 'Loading',
       pageBuilder: (context, animation, secondaryAnimation) {
         return Scaffold(
-          backgroundColor: Colors.black.withOpacity(0.7), // Optional: Background color with opacity
+          backgroundColor: Colors.black.withOpacity(0.7),
           body: const Center(
             child: PotionLoadingIndicator(),
           ),

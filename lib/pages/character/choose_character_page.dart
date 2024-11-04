@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dungeons_and_dragons/custom_widgets/character_card.dart';
 import 'package:dungeons_and_dragons/custom_widgets/signing_button.dart';
-import 'package:dungeons_and_dragons/generated/assets.dart';
 import 'package:dungeons_and_dragons/mixins/m_loadable.dart';
 import 'package:dungeons_and_dragons/providers/appearance_provider.dart';
 import 'package:dungeons_and_dragons/providers/asset_provider.dart';
@@ -58,11 +57,7 @@ class _CharacterPageState extends ConsumerState<CharacterPage> with MLoadable {
     }));
   }
 
-  void chooseCharacter() {
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-      return const GamePage();
-    }));
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +99,8 @@ class _CharacterPageState extends ConsumerState<CharacterPage> with MLoadable {
         stream: getCharacters(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+                child: CircularProgressIndicator()); //TODO potion
           }
 
           if (snapshot.hasError) {
@@ -136,7 +132,8 @@ class _CharacterPageState extends ConsumerState<CharacterPage> with MLoadable {
                 builder: (context, appearanceSnapshot) {
                   if (appearanceSnapshot.connectionState ==
                       ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(
+                        child: CircularProgressIndicator()); //TODO potion
                   }
 
                   if (appearanceSnapshot.hasError) {
@@ -185,27 +182,28 @@ class _CharacterPageState extends ConsumerState<CharacterPage> with MLoadable {
                     1.0,
                   );
 
+                  CharacterAppearance appearance = CharacterAppearance(
+                      hairIndex: hairIndex,
+                      eyeIndex: eyeIndex,
+                      mouthIndex: mouthIndex,
+                      headIndex: headIndex,
+                      hairColorR: hairColor.red.toDouble(),
+                      hairColorG: hairColor.green.toDouble(),
+                      hairColorB: hairColor.blue.toDouble(),
+                      eyeColorR: eyeColor.red.toDouble(),
+                      eyeColorG: eyeColor.green.toDouble(),
+                      eyeColorB: eyeColor.blue.toDouble(),
+                      hairAssets: hairAssets,
+                      headAssets: headAssets,
+                      mouthAssets: mouthAssets,
+                      eyeAssets: eyeAssets);
+
                   return CharacterCard(
                       deleteAction: () {
                         deleteCharacter(characterId, appearanceDocument.id);
                       },
-                      action: chooseCharacter,
                       characterName: characterName,
-                      appearance: CharacterAppearance(
-                          hairIndex: hairIndex,
-                          eyeIndex: eyeIndex,
-                          mouthIndex: mouthIndex,
-                          headIndex: headIndex,
-                          hairColorR: hairColor.red.toDouble(),
-                          hairColorG: hairColor.green.toDouble(),
-                          hairColorB: hairColor.blue.toDouble(),
-                          eyeColorR: eyeColor.red.toDouble(),
-                          eyeColorG: eyeColor.green.toDouble(),
-                          eyeColorB: eyeColor.blue.toDouble(),
-                          hairAssets: hairAssets,
-                          headAssets: headAssets,
-                          mouthAssets: mouthAssets,
-                          eyeAssets: eyeAssets));
+                      appearance: appearance);
                 },
               );
             },
