@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../custom_widgets/potion_loading_indicator.dart';
 
- mixin class MLoadable  {
+ //TEST
+mixin class MLoadable  {
 
   void showLoadingPotion(BuildContext context) {
     showGeneralDialog(
