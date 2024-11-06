@@ -1,5 +1,6 @@
 import 'package:dungeons_and_dragons/custom_widgets/shader_image.dart';
 import 'package:flutter/material.dart';
+import '../data/appearance.dart';
 import '../generated/assets.dart';
 import '../pages/game_page.dart';
 import '../providers/appearance_provider.dart';
@@ -13,7 +14,7 @@ class CharacterCard extends StatelessWidget {
   });
   final VoidCallback deleteAction;
   final String characterName;
-  final CharacterAppearance appearance;
+  final Appearance appearance;
 
   @override
   Widget build(BuildContext context) {

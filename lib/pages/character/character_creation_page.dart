@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dungeons_and_dragons/providers/attribute_provider.dart';
 import 'package:dungeons_and_dragons/providers/carousel_index_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,8 @@ class _CharacterCreationPageState extends ConsumerState<CharacterCreationPage> {
   @override
   Widget build(BuildContext context) {
     int currentIndex = ref.watch(currentCarouselIndexProvider);
-    final appearanceState = ref.watch(characterAppearanceStateProvider);
+    final appearanceProvider = ref.watch(characterAppearanceStateProvider);
+    final attributesProvider = ref.watch(characterAttributeStateProvider);
     final TextEditingController nameController = TextEditingController();
 
     final CollectionReference characters = FirebaseFirestore.instance.collection("Characters");
@@ -88,27 +90,39 @@ class _CharacterCreationPageState extends ConsumerState<CharacterCreationPage> {
       await characterRef.set({
         'id': characterRef.id,
         'name': nameController.text.trim(),
-        'stats': "test", //Todo
+        'attributes': {
+          "vitality": attributesProvider.vitality,
+          "endurance": attributesProvider.endurance,
+          "experience": attributesProvider.experience,
+          "strength": attributesProvider.strength,
+          "intelligence": attributesProvider.intelligence,
+          "agility": attributesProvider.agility,
+          "inferno": attributesProvider.inferno,
+          "faith": attributesProvider.faith,
+          "spirit": attributesProvider.spirit,
+          "dark": attributesProvider.dark,
+        },
         "class": getClass(),
         "user_id": currentUser!.uid,
       });
 
+
       await appearanceRef.set({
         'id': appearanceRef.id,
-        "head": appearanceState.headIndex,
-        "hair": appearanceState.hairIndex,
-        "eye": appearanceState.eyeIndex,
-        "mouth": appearanceState.mouthIndex,
+        "head": appearanceProvider.headIndex,
+        "hair": appearanceProvider.hairIndex,
+        "eye": appearanceProvider.eyeIndex,
+        "mouth": appearanceProvider.mouthIndex,
         "character_id": characterRef.id,
         "hairColor": {
-          "r": appearanceState.hairColorR.toInt(),
-          "g": appearanceState.hairColorG.toInt(),
-          "b": appearanceState.hairColorB.toInt(),
+          "r": appearanceProvider.hairColorR.toInt(),
+          "g": appearanceProvider.hairColorG.toInt(),
+          "b": appearanceProvider.hairColorB.toInt(),
         },
         "eyeColor": {
-          "r": appearanceState.eyeColorR.toInt(),
-          "g": appearanceState.eyeColorG.toInt(),
-          "b": appearanceState.eyeColorB.toInt(),
+          "r": appearanceProvider.eyeColorR.toInt(),
+          "g": appearanceProvider.eyeColorG.toInt(),
+          "b": appearanceProvider.eyeColorB.toInt(),
         }
       });
 
@@ -170,9 +184,6 @@ class _CharacterCreationPageState extends ConsumerState<CharacterCreationPage> {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: SigningButton(action: (){}, buttonText: "Appearance"),
       ),
     );
   }

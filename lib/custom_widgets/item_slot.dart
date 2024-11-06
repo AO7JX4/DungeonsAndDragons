@@ -28,7 +28,7 @@ class ItemSlot extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.topRight,
                       child: FractionallySizedBox(
-                        heightFactor: 0.2,
+                        heightFactor: 0.18,
                         widthFactor: 0.38,
                         child: Container(color: Colors.blue),
                       ),
@@ -47,7 +47,7 @@ class ItemSlot extends StatelessWidget {
                       child: Transform.translate(
                         offset: Offset(0, -constraints.maxHeight * 0.15),
                         child: FractionallySizedBox(
-                          heightFactor: 0.2,
+                          heightFactor: 0.18,
                           widthFactor: 0.38,
                           child: Container(color: Colors.orange),
                         ),
@@ -67,7 +67,7 @@ class ItemSlot extends StatelessWidget {
                       child: Transform.translate(
                         offset: Offset(0, constraints.maxHeight * 0.07),
                         child: FractionallySizedBox(
-                          heightFactor: 0.2,
+                          heightFactor: 0.18,
                           widthFactor: 0.38,
                           child: Container(color: Colors.blue),
                         ),
@@ -87,7 +87,7 @@ class ItemSlot extends StatelessWidget {
                       child: Transform.translate(
                         offset: Offset(0, constraints.maxHeight * 0.07),
                         child: FractionallySizedBox(
-                          heightFactor: 0.2,
+                          heightFactor: 0.18,
                           widthFactor: 0.38,
                           child: Container(color: Colors.blue),
                         ),
@@ -107,7 +107,7 @@ class ItemSlot extends StatelessWidget {
                       child: Transform.translate(
                         offset: Offset(0, constraints.maxHeight * 0.29),
                         child: FractionallySizedBox(
-                          heightFactor: 0.2,
+                          heightFactor: 0.18,
                           widthFactor: 0.38,
                           child: Container(color: Colors.orange),
                         ),
@@ -122,7 +122,7 @@ class ItemSlot extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.bottomLeft,
                   child: FractionallySizedBox(
-                    heightFactor: 0.2,
+                    heightFactor: 0.18,
                     widthFactor: 0.38,
                     child: Container(color: Colors.orange),
                   ),

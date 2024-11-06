@@ -7,6 +7,7 @@ import 'package:dungeons_and_dragons/providers/asset_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../data/appearance.dart';
 import '../auth_page.dart';
 import 'character_creation_page.dart';
 import '../game_page.dart';
@@ -182,7 +183,7 @@ class _CharacterPageState extends ConsumerState<CharacterPage> with MLoadable {
                     1.0,
                   );
 
-                  CharacterAppearance appearance = CharacterAppearance(
+                  Appearance appearance = Appearance(
                       hairIndex: hairIndex,
                       eyeIndex: eyeIndex,
                       mouthIndex: mouthIndex,
@@ -199,7 +200,7 @@ class _CharacterPageState extends ConsumerState<CharacterPage> with MLoadable {
                       eyeAssets: eyeAssets);
 
                   return CharacterCard(
-                      deleteAction: () {
+                      deleteAction: () { //TODO delete inventory
                         deleteCharacter(characterId, appearanceDocument.id);
                       },
                       characterName: characterName,

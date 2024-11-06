@@ -2,7 +2,6 @@
 class Assets {
   Assets._();
 
-  static const String abstractLoadableWidget = 'lib/abstract/m_loadable.dart';
   static const String appearanceBody = 'lib/assets/appearance/body.png';
   static const String appearanceEye1 = 'lib/assets/appearance/eye1.png';
   static const String appearanceEye2 = 'lib/assets/appearance/eye2.png';
@@ -28,6 +27,7 @@ class Assets {
   static const String characterCharacterCreationPage = 'lib/pages/character/character_creation_page.dart';
   static const String characterCharacterNamePage = 'lib/pages/character/character_name_page.dart';
   static const String characterChooseCharacterPage = 'lib/pages/character/choose_character_page.dart';
+  static const String customWidgetsAttributeRow = 'lib/custom_widgets/attribute_row.dart';
   static const String customWidgetsCharacterCard = 'lib/custom_widgets/character_card.dart';
   static const String customWidgetsColorSlider = 'lib/custom_widgets/color_slider.dart';
   static const String customWidgetsInfiniteCarousel = 'lib/custom_widgets/infinite_carousel.dart';
@@ -36,14 +36,21 @@ class Assets {
   static const String customWidgetsPotionLoadingIndicator = 'lib/custom_widgets/potion_loading_indicator.dart';
   static const String customWidgetsShaderImage = 'lib/custom_widgets/shader_image.dart';
   static const String customWidgetsSigningButton = 'lib/custom_widgets/signing_button.dart';
+  static const String dataAppearance = 'lib/data/appearance.dart';
+  static const String dataAttributes = 'lib/data/attributes.dart';
+  static const String dataCharacter = 'lib/data/character.dart';
+  static const String dataItem = 'lib/data/item.dart';
+  static const String dataMoney = 'lib/data/money.dart';
   static const String generatedAssets = 'lib/generated/assets.dart';
   static const String libFirebaseOptions = 'lib/firebase_options.dart';
   static const String libMain = 'lib/main.dart';
+  static const String mixinsMLoadable = 'lib/mixins/m_loadable.dart';
   static const String pagesAuthPage = 'lib/pages/auth_page.dart';
   static const String pagesGamePage = 'lib/pages/game_page.dart';
   static const String pagesLoginPage = 'lib/pages/login_page.dart';
   static const String pagesRegisterPage = 'lib/pages/register_page.dart';
   static const String providersAppearanceProvider = 'lib/providers/appearance_provider.dart';
+
   static const String shadersChangeImageColorShader = 'lib/assets/shaders/change_image_color_shader.frag';
 
 }
