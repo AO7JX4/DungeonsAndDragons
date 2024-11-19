@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import '../data/appearance.dart';
 import 'asset_provider.dart';
 
 part 'appearance_provider.g.dart';
@@ -6,13 +7,13 @@ part 'appearance_provider.g.dart';
 @riverpod
 class CharacterAppearanceState extends _$CharacterAppearanceState {
   @override
-  CharacterAppearance build() {
+  Appearance build() {
     final hairAssets = ref.watch(hairAssetsProvider);
     final eyeAssets = ref.watch(eyeAssetsProvider);
     final mouthAssets = ref.watch(mouthAssetsProvider);
     final headAssets = ref.watch(headAssetsProvider);
 
-    return CharacterAppearance(
+    return Appearance(
       hairIndex: 0,
       eyeIndex: 0,
       mouthIndex: 0,
@@ -89,70 +90,6 @@ class CharacterAppearanceState extends _$CharacterAppearanceState {
   void updateEyeBColor(double b) {
     state = state.copyWith(
       eyeColorB: b,
-    );
-  }
-}
-
-class CharacterAppearance {
-  final int hairIndex;
-  final int eyeIndex;
-  final int mouthIndex;
-  final int headIndex;
-  final double hairColorR;
-  final double hairColorG;
-  final double hairColorB;
-  final double eyeColorR;
-  final double eyeColorG;
-  final double eyeColorB;
-  final List<String> hairAssets;
-  final List<String> eyeAssets;
-  final List<String> mouthAssets;
-  final List<String> headAssets;
-
-  CharacterAppearance({
-    required this.hairIndex,
-    required this.eyeIndex,
-    required this.mouthIndex,
-    required this.headIndex,
-    required this.hairColorR,
-    required this.hairColorG,
-    required this.hairColorB,
-    required this.eyeColorR,
-    required this.eyeColorG,
-    required this.eyeColorB,
-    required this.hairAssets,
-    required this.eyeAssets,
-    required this.mouthAssets,
-    required this.headAssets,
-  });
-
-  CharacterAppearance copyWith({
-    int? hairIndex,
-    int? eyeIndex,
-    int? mouthIndex,
-    int? headIndex,
-    double? hairColorR,
-    double? hairColorG,
-    double? hairColorB,
-    double? eyeColorR,
-    double? eyeColorG,
-    double? eyeColorB,
-  }) {
-    return CharacterAppearance(
-      hairIndex: hairIndex ?? this.hairIndex,
-      eyeIndex: eyeIndex ?? this.eyeIndex,
-      mouthIndex: mouthIndex ?? this.mouthIndex,
-      headIndex: headIndex ?? this.headIndex,
-      hairColorR: hairColorR ?? this.hairColorR,
-      hairColorG: hairColorG ?? this.hairColorG,
-      hairColorB: hairColorB ?? this.hairColorB,
-      eyeColorR: eyeColorR ?? this.eyeColorR,
-      eyeColorG: eyeColorG ?? this.eyeColorG,
-      eyeColorB: eyeColorB ?? this.eyeColorB,
-      hairAssets: hairAssets,
-      eyeAssets: eyeAssets,
-      mouthAssets: mouthAssets,
-      headAssets: headAssets,
     );
   }
 }

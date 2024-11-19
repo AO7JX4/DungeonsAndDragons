@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'appearance_provider.dart';
+part of 'attribute_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$characterAppearanceStateHash() =>
-    r'30c1628c4fb4628e0405e32d8cfa6ddd11791e42';
+String _$characterAttributeStateHash() =>
+    r'a0725d54af6805e809ef981c7064c615c9592a6f';
 
-/// See also [CharacterAppearanceState].
-@ProviderFor(CharacterAppearanceState)
-final characterAppearanceStateProvider =
-    AutoDisposeNotifierProvider<CharacterAppearanceState, Appearance>.internal(
-  CharacterAppearanceState.new,
-  name: r'characterAppearanceStateProvider',
+/// See also [CharacterAttributeState].
+@ProviderFor(CharacterAttributeState)
+final characterAttributeStateProvider =
+    AutoDisposeNotifierProvider<CharacterAttributeState, Attributes>.internal(
+  CharacterAttributeState.new,
+  name: r'characterAttributeStateProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$characterAppearanceStateHash,
+      : _$characterAttributeStateHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$CharacterAppearanceState = AutoDisposeNotifier<Appearance>;
+typedef _$CharacterAttributeState = AutoDisposeNotifier<Attributes>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
